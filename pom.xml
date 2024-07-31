@@ -88,7 +88,7 @@
     <maven-surefire-plugin.version>3.3.0</maven-surefire-plugin.version>
     <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-pmd-plugin.version>3.23.0</maven-pmd-plugin.version>
-    <pmd.version>7.3.0</pmd.version>
+    <pmd.version>7.3.0-SNAPSHOT</pmd.version>
     <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>
     <checkstyle.version>10.17.0</checkstyle.version>
     <spotbugs-maven-plugin.version>4.8.6.1</spotbugs-maven-plugin.version>
@@ -637,6 +637,23 @@
           </dependency>
         </dependencies>
         <executions>
+          <execution>
+            <id>run-pmd-metrics-java</id>
+            <goals>
+              <goal>pmd</goal>
+              <goal>check</goal>
+            </goals>
+            <phase>verify</phase>
+            <configuration>
+              <targetDirectory>${project.build.directory}/pmd-metrics-java</targetDirectory>
+              <rulesets>
+                <ruleset>/category/java/metric.xml</ruleset>
+              </rulesets>
+              <format>net.sourceforge.pmd.renderers.MetricsRenderer</format>
+              <includeTests>false</includeTests>
+              <skip>${pmd.skip}</skip>
+            </configuration>
+          </execution>
           <execution>
             <id>run-pmd-java</id>
             <goals>
