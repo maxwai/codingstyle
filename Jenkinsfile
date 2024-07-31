@@ -21,7 +21,7 @@ node('java-agent') {
                     [threshold: 60.0, metric: 'LINE', baseline: 'PROJECT', unstable: true],
                     [threshold: 60.0, metric: 'BRANCH', baseline: 'PROJECT', unstable: true]])
 
-        recordCoverage(tools: [[parser: 'METRICS', pattern: "target/pmd-metrics-java"]],
+        recordCoverage(tools: [[parser: 'METRICS', pattern: "target/pmd-metrics-java/pmd.xml"]],
                 id: 'metrics', name: 'Metrics',
                 sourceCodeRetention: 'EVERY_BUILD')
     }
