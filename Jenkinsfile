@@ -14,12 +14,12 @@ node('java-agent') {
             sh 'mvn -V -e clean verify -Dgpg.skip -Pci'
         }
 
-//         recordCoverage(tools: [[parser: 'JACOCO']],
-//                 id: 'jacoco', name: 'JaCoCo Coverage',
-//                 sourceCodeRetention: 'EVERY_BUILD',
-//                 qualityGates: [
-//                     [threshold: 60.0, metric: 'LINE', baseline: 'PROJECT', unstable: true],
-//                     [threshold: 60.0, metric: 'BRANCH', baseline: 'PROJECT', unstable: true]])
+        recordCoverage(tools: [[parser: 'JACOCO'], [parser: 'METRICS', pattern: "target/pmd-metrics-java/pmd.xml"]],
+                id: 'jacoco', name: 'JaCoCo Coverage',
+                sourceCodeRetention: 'EVERY_BUILD',
+                qualityGates: [
+                    [threshold: 60.0, metric: 'LINE', baseline: 'PROJECT', unstable: true],
+                    [threshold: 60.0, metric: 'BRANCH', baseline: 'PROJECT', unstable: true]])
 
         recordCoverage(tools: [[parser: 'METRICS', pattern: "target/pmd-metrics-java/pmd.xml"]],
                 id: 'metrics', name: 'Metrics',
