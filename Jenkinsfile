@@ -10,7 +10,7 @@ node('java-agent') {
     }
 
     stage ('Build, Test, and Static Analysis') {
-        withMaven(mavenLocalRepo: '/var/data/m2repository', mavenOpts: '-Xmx768m -Xms512m') {
+        withMaven(mavenLocalRepo: '/home/jenkins/agent/m2repository', mavenOpts: '-Xmx768m -Xms512m') {
             sh 'mvn -V -e clean verify -Dgpg.skip -Pci'
         }
 
