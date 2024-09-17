@@ -14,7 +14,7 @@ node('java-agent') {
             sh 'mvn -V -e clean verify -Dgpg.skip -Pci'
         }
 
-        recordCoverage(tools: [[parser: 'JACOCO'], [parser: 'METRICS', pattern: "target/pmd-metrics-java/pmd.xml"]],
+        recordCoverage(tools: [[parser: 'JACOCO']],
                 id: 'jacoco', name: 'JaCoCo Coverage',
                 sourceCodeRetention: 'EVERY_BUILD',
                 qualityGates: [
